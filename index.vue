@@ -11,8 +11,11 @@
 </template>
 
 <script>
+  import LoginMenu from './login-menu.vue'
   export default {
-    components: {},
+    components: {
+      LoginMenu
+    },
     data() {
       return {
         auth: null
