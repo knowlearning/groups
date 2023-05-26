@@ -1,12 +1,12 @@
 <template>
-  <div v-if="provider === null">initializing...</div>
+  <div v-if="auth === null">initializing...</div>
   <LoginMenu
-    v-else-if="provider === 'anonymous'"
+    v-else-if="auth.provider === 'anonymous'"
     google
     microsoft
   />
   <div v-else>
-    logged in!
+    <button @click="logOut">log out</button>
   </div>
 </template>
 
@@ -14,7 +14,18 @@
   export default {
     components: {},
     data() {
-      return {}
+      return {
+        auth: null
+      }
+    },
+    async created() {
+      const { auth } = await Agent.environment()
+      this.auth = auth
+    },
+    methods: {
+      logOut() {
+        Agent.logout()
+      }
     }
   }
 </script>
